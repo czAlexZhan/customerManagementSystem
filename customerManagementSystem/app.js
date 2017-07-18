@@ -4,15 +4,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mysql = require('mysql');
+var mysqlOption = require('./conf/mysqlConf');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var loginAction = require('./routes/LoginAction');
+var customerInfoAction = require('./routes/CustomerInfoActin');
+
+//Mysql数据库连接池对象
+global.mysqlPool = mysql.createPool(mysqlOption);
+
+
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.engine('html',require("ejs").__express);
+app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,8 +30,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+//Action
+app.use('/', loginAction);
+app.use('/login',loginAction);
+app.use('/customerInfoAction', customerInfoAction);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
