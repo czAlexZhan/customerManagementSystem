@@ -3,15 +3,13 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
-var mysql = require('mysql');
-var mysqlOption = require('./conf/mysqlConf');
 
 var loginAction = require('./routes/LoginAction');
 var customerInfoAction = require('./routes/CustomerInfoAction');
 
-//Mysql数据库连接池对象
-global.mysqlPool = mysql.createPool(mysqlOption);
+
 
 
 
@@ -26,14 +24,24 @@ app.set('view engine', 'html');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Session
+app.use(cookieParser());
+app.use(session({
+    resave: true,
+    secret: 'zhanxw',
+    saveUninitialized: false,
+    cookie:{
+        maxAge: 1000*60*60
+    }
+}));
 
 //Action
 app.use('/', loginAction);
-app.use('/login',loginAction);
-app.use('/customerInfoAction', customerInfoAction);
+app.use('/login/*',loginAction);
+app.use('/customerInfoAction/*', customerInfoAction);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
