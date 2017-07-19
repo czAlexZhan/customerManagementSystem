@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/reset.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/login/login.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/login/dialog.css">
+</head>
+<body>
+	<div class="body_bg">
+		<div class="wrap_div">
+			<div class="content">
+				<div>
+					<label class="onlyread" for="userName"></label>
+					<span class="userName_bg"></span>
+					<input type="text" id="userName" class="userName" name="userName" placeholder="用户名">
+				</div>
+				<div>
+					<label class="onlyread" for="password"></label>
+					<span class="password_bg"></span>
+					<input type="text" id="password" class="password" name="password" placeholder="密码">
+				</div>
+				<div>
+					<button id="login">登录</button>
+				</div>
+				<div>
+					<span class="register">注册</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="javascripts/lib/jquery-3.2.1.min.js"></script>
+<script src="javascripts/lib/jquery.dialog.js"></script>
+<script src="javascripts/login/login.js"></script>
+
+</html>

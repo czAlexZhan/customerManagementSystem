@@ -8,7 +8,7 @@ var mysql = require('mysql');
 var mysqlOption = require('./conf/mysqlConf');
 
 var loginAction = require('./routes/LoginAction');
-var customerInfoAction = require('./routes/CustomerInfoActin');
+var customerInfoAction = require('./routes/CustomerInfoAction');
 
 //Mysql数据库连接池对象
 global.mysqlPool = mysql.createPool(mysqlOption);
