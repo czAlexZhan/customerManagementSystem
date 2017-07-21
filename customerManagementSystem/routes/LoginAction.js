@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var loginService = require('../service/LoginService');
+var md5Service = require('../service/MD5Service');
 
 /*
 post 数据
@@ -25,5 +26,17 @@ router.route('/login').get(function(req,res){
     password = req.body.password;
 
     var userInfo = loginService.getUserInfoByUserName(userName);
+    if(userInfo.length > 0 && userInfo != undefined){
+        //判断密码是否相同
+        var Depwd = md5Service.aesDecrypt(password,'zhanxw');
+        if(Depwd == md5Service.aesDecrypt(userInfo[0].password,'zhanxw')){
+                res.send(200,{flag:"success",msg:"登陆成功"});
+        }else{
+            res.send(200,{flag:"fail",msg:"登陆失败，密码错误"})
+        }
+    }else{
+        res.send(200,{flag:"fail",msg:'此用户未注册'});
+    }
+
 });
 module.exports = router;

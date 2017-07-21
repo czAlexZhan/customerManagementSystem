@@ -1,5 +1,5 @@
 var log4js = require('log4js');
-var option = require('./conf/log4Conf');
+var option = require('../conf/log4Conf');
 
 log4js.configure(option);
 
