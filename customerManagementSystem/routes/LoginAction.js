@@ -25,18 +25,21 @@ router.route('/login').get(function(req,res){
     userName = req.body.userName;
     password = req.body.password;
 
-    var userInfo = loginService.getUserInfoByUserName(userName);
-    if(userInfo.length > 0 && userInfo != undefined){
-        //判断密码是否相同
-        var Depwd = md5Service.aesDecrypt(password,'zhanxw');
-        if(Depwd == md5Service.aesDecrypt(userInfo[0].password,'zhanxw')){
+    loginService.getUserInfoByUserName(userName,function (err,data) {
+        var userInfo = data;
+        if(userInfo != undefined){
+            //判断密码是否相同
+            var Depwd = md5Service.aesEncrypto(password,'zhanxw');
+            if(Depwd == md5Service.aesDecrypt(userInfo.password,'zhanxw')){
                 res.send(200,{flag:"success",msg:"登陆成功"});
+            }else{
+                res.send(200,{flag:"fail",msg:"登陆失败，密码错误"})
+            }
         }else{
-            res.send(200,{flag:"fail",msg:"登陆失败，密码错误"})
+            res.send(200,{flag:"fail",msg:'此用户未注册'});
         }
-    }else{
-        res.send(200,{flag:"fail",msg:'此用户未注册'});
-    }
+    });
+
 
 });
 module.exports = router;

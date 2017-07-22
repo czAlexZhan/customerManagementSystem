@@ -1,7 +1,7 @@
 var loginDao = require('../dao/LoginDao');
 
 module.exports = {
-  getUserInfoByUserName:function (name) {
-    return loginDao.getUserInfoByUsername(name);
+  getUserInfoByUserName:function (userName,callback) {
+    return loginDao.getUserInfoByUsername(userName,callback);
   }
 };
