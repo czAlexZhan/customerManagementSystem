@@ -26,20 +26,47 @@ router.route('/login').get(function(req,res){
     password = req.body.password;
 
     loginService.getUserInfoByUserName(userName,function (err,data) {
-        var userInfo = data;
-        if(userInfo != undefined){
-            //判断密码是否相同
-            var Depwd = md5Service.aesEncrypto(password,'zhanxw');
-            if(Depwd == md5Service.aesDecrypt(userInfo.password,'zhanxw')){
-                res.send(200,{flag:"success",msg:"登陆成功"});
-            }else{
-                res.send(200,{flag:"fail",msg:"登陆失败，密码错误"})
-            }
+        if(err){
+            console.log(err);
         }else{
-            res.send(200,{flag:"fail",msg:'此用户未注册'});
+            var userInfo = data[0];
+            if(userInfo != undefined){
+                //判断密码是否相同
+                var Depassword = userInfo.USER_PASSWORD.toString();
+                if(password == md5Service.aesDecrypt(Depassword,"zhanxw")){
+                    req.session.sys_user_id = userInfo.SYS_USER_ID;
+                    res.send(200,{flag:true,msg:"登陆成功"});
+                }else{
+                    res.send(200,{flag:false,msg:"登陆失败，密码错误"})
+                }
+            }else{
+                res.send(200,{flag:false,msg:'此用户未注册'});
+            }
         }
+
     });
 
+router.post('/register',function (req, res) {
+   userName = req.body.userName;
+   password = req.body.password;
+   //密码加密
+    var encryptoPassword = md5Service.aesEncrypto(password,'zhanxw');
+    loginService.registerUserInfo(userName,encryptoPassword,function (err, data) {
+       if(err){
+           console.log(err);
+       }else{
+           if(data == null){
+               res.send(200,{msg:"此用户已存在"});
+           }else{
+               var insertId = data.insertId;
+               if(insertId != undefined){
+                   req.session.sys_user_id = insertId;
+                   res.redirect('/login');
+               }
+           }
+       }
+    });
 
+});
 });
 module.exports = router;

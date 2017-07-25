@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %> </title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/customerInfo/home.css">
+</head>
+<body>
+    <div class="body_bg" data-index="1">
+        <div id="changeBg"><button>换背景</button></div>
+        <div class="wrap_div">
+            <div id="search" class="searchIn">
+                查询
+            </div>
+            <div id="record" class="recordIn">
+                记录
+            </div>
+            <div id="search_table">
+                <div class="back"><span><a> <- 返回 </a></span></div>
+                <div class="search_area">
+                    <div>
+                        <div><input type="text" id="account"></div>
+                        <div><input type="text" id="target_name"></div>
+                        <div><input type="text" id="product_name"></div>
+                        <div><input type="checkbox" name="isDeal" id="isDeal" value="是否成交"></div>
+                    </div>
+                    <div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div id="record_table">
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="javascripts/lib/jquery-3.2.1.min.js"></script>
+<script src="javascripts/customerInfo/index.js"></script>
+</html>

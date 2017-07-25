@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var loginAction = require('./routes/LoginAction');
 var customerInfoAction = require('./routes/CustomerInfoAction');
 
-
+global.sqlPool = require('../service/MysqlService');
 
 
 
@@ -40,8 +40,7 @@ app.use(session({
 
 //Action
 app.use('/', loginAction);
-app.use('/login/*',loginAction);
-app.use('/customerInfoAction/*', customerInfoAction);
+app.use('/customerInfoAction', customerInfoAction);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

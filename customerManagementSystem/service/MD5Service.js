@@ -7,7 +7,7 @@ module.exports = {
     aesEncrypto :function (data, key) {
         const cipher = crypto.createCipher('aes192',key);
         var crypted = cipher.update(data,'utf8','hex');
-        crypted += crypted.final('hex');
+        crypted += cipher.final('hex');
         return crypted;
     },
     aesDecrypt :function(encrypted, key) {
