@@ -17,26 +17,38 @@
                 记录
             </div>
             <div id="search_table">
-                <div class="back"><span><a> <- 返回 </a></span></div>
+                <div class="back"><span style="display: inline-block;width:100%;text-align: left;padding-left: 5px;"><a style="padding-right:10px;" href="javascript:void(0);" onclick="back(this)"> << 返回 </a>当前位置：&nbsp;&nbsp;记录查询</span></div>
                 <div class="search_area">
                     <div>
-                        <div><input type="text" id="account"></div>
-                        <div><input type="text" id="target_name"></div>
-                        <div><input type="text" id="product_name"></div>
-                        <div><input type="checkbox" name="isDeal" id="isDeal" value="是否成交"></div>
+                        <div><span style="padding-right:10px;">用户账号：</span><input type="text" id="account"></div>
+                        <div><span style="padding-right:10px;">公司名称：</span><input type="text" id="target_name"></div>
+                        <div><span style="padding-right:10px;">产品名称：</span><input type="text" id="product_name"></div>
+                        <div><span style="padding-right:10px;"></span><input type="checkbox" name="isDeal" id="isDeal" value="是否成交">&nbsp;&nbsp;是否成交</div>
                     </div>
                     <div>
-                        <div></div>
-                        <div></div>
+                        <div>
+                            <span style="padding-right:10px;">联系时间：</span>
+                            <input type="text" id="connectTimeStart" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'connectTimeEnd\')}'})"> 至
+                            <input type="text" id="connectTimeEnd" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'connectTimeStart\')}'})">
+                        </div>
+                        <div>
+                            <span style="padding-right:10px;">成交时间：</span>
+                            <input type="text" id="dealTimeStart" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'dealTimeEnd\')}'})"> 至
+                            <input type="text" id="dealTimeEnd" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'dealTimeStart\')}'})">
+                        </div>
                     </div>
+                </div>
+                <div id="search_results">
+
                 </div>
             </div>
             <div id="record_table">
-
+                <div class="back"><span style="display: inline-block;width:100%;text-align: left;padding-left: 5px;"><a style="padding-right:10px;" href="javascript:void(0);" onclick="back(this)"> << 返回 </a>当前位置：&nbsp;&nbsp;新增记录</span></div>
             </div>
         </div>
     </div>
 </body>
 <script src="javascripts/lib/jquery-3.2.1.min.js"></script>
+<script src="javascripts/lib/date/wdatePicker.js"></script>
 <script src="javascripts/customerInfo/index.js"></script>
 </html>

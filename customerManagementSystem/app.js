@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var loginAction = require('./routes/LoginAction');
 var customerInfoAction = require('./routes/CustomerInfoAction');
 
-global.sqlPool = require('../service/MysqlService');
+global.sqlPool = require('./service/MysqlService');
 
 
 
