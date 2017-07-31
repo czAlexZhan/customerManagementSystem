@@ -8,7 +8,10 @@
 </head>
 <body>
     <div class="body_bg" data-index="1">
-        <div id="changeBg"><button>换背景</button></div>
+        <div class="banner">
+            <div class="loginOut"><a style="color: #ffffff;" href="loginOut">注销</a></div>
+            <div id="changeBg"><button>换背景</button></div>
+        </div>
         <div class="wrap_div">
             <div id="search" class="searchIn">
                 查询
@@ -44,6 +47,28 @@
             </div>
             <div id="record_table">
                 <div class="back"><span style="display: inline-block;width:100%;text-align: left;padding-left: 5px;"><a style="padding-right:10px;" href="javascript:void(0);" onclick="back(this)"> << 返回 </a>当前位置：&nbsp;&nbsp;新增记录</span></div>
+                <table id="addInfo" style="width: 100%;border-collapse: collapse;margin: 5px 0;">
+                    <thead>
+                        <tr>
+                            <th>用户账号</th>
+                            <th>公司名称</th>
+                            <th>成交时间</th>
+                            <th>联系时间</th>
+                            <th>产品名称</th>
+                            <th>产品价格</th>
+                            <th>是否成交</th>
+                            <th>成交次数</th>
+                            <th>店铺</th>
+                            <th>是否重复</th>
+                            <th>重复名</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="12" align="center"><a href="javascript:void(0);" onclick="addTr(this)">新增一行</a></td></tr>
+                    </tbody>
+                    <tfoot><tr><td style="border: none;" colspan="12"><button id="saveBtn" onclick="saveInfo()">保存</button></td></tr></tfoot>
+                </table>
             </div>
         </div>
     </div>

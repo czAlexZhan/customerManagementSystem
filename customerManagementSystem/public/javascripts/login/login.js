@@ -29,7 +29,7 @@ $('.register').click(function () {
     var userName = $('#userName').val();
     var password = $('#password').val();
     if(jQuery.isEmptyObject(userName) || jQuery.isEmptyObject(password)){
-        $.dialog.alert({content:"请先输入用户名或密码"});
+        alert('请先输入用户名或密码');
     }else{
         $.ajax({
             url:'register',
@@ -37,7 +37,8 @@ $('.register').click(function () {
             data:{userName:userName,password:password},
             dataType:'json',
             success:function (data) {
-                console.log(data);
+                alert(data.msg);
+                window.location.href = '/login';
             },
             error:function(err){
                 console.log(err);

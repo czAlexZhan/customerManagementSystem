@@ -16,6 +16,10 @@
     height:100vh;
     background: url("../../images/bg_1.jpg");
     background-size: cover;
+    overflow: hidden;
+}
+.banner{
+    position: relative;
 }
 .wrap_div{
     width:100%;
@@ -46,6 +50,12 @@
 #record{
     background: #41b15a;
     top: 30%;
+}
+.loginOut{
+    position: absolute;
+    left:3%;
+    top:1%;
+    z-index: 10;
 }
 #changeBg{
     position: absolute;
@@ -83,15 +93,18 @@
     opacity:1;
     transition: all .8s;
 }
-#search_table{
+#search_table,#record_table{
     position: absolute;
     width:1000px;
+    height: 600px;
     left:calc((100vw - 1000px)/2);
-    top:40%;
+    top:calc((100vh - 600px)/2);
     border: 1px solid #999999;
     z-index: 100;
     display: none;
     background: #ffffff;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 .back{
     border-bottom: 1px solid #ccc;
@@ -111,4 +124,32 @@
 }
 .search_area > div >div{
     margin-left:54px;
+}
+#addInfo tr th,#addInfo tr td{
+    border:1px solid #cccccc;
+    border-collapse: collapse;
+}
+#addInfo thead{
+    /*padding:5px 0;*/
+    background: #699ef3;
+}
+#addInfo input{
+    border:none;
+    outline: none;
+}
+#saveBtn{
+    width: 80px;
+    height: 30px;
+    background: #e84b4b;
+    outline: none;
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#saveBtn:hover{
+    background: #699ef3;
+}
+.info td input{
+    text-align: center;
 }

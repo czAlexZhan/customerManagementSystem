@@ -11,13 +11,14 @@ router.get('/',function(req,res){
         res.redirect('/login');
     }
 });
+
 router.post('/addCustomerInfoAction',function (req, res) {
     logger.info('进入添加用户信息方法 addCustomerInfoAction');
-    let customerInfoList = JSON.parse(req.body.customerInfoList);
+    let customerInfoList = req.body.customerInfoList;
     if(customerInfoList != undefined){
         let length = customerInfoList.length;
         customerInfoService.insertCustomerInfo(customerInfoList,function(err,results){
-            let insertLength = results.length;
+            let insertLength = results.affectedRows;
             if(err){
                 logger.error('数据库查询错误->'+err)
             }
@@ -25,9 +26,12 @@ router.post('/addCustomerInfoAction',function (req, res) {
                 let failedNum = length - insertLength;
                 let resultsMsg = "更新成功 "+insertLength+" 行，失败 "+failedNum+" 行";
                 res.send(200,{"msg":resultsMsg});
+            }else{
+                res.send(200,{"msg":"更新失败"});
             }
         });
     }
     logger.info('退出添加用户信息方法 addCustomerInfoAction');
 });
+
 module.exports = router;

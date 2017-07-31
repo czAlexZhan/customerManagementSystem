@@ -49,10 +49,15 @@ router.route('/login').get(function(req,res){
             }
         }
     });
+
     logger.info('退出登录post方法');
 });
 router.post('/register',function (req, res) {
     logger.info('进入注册post方法');
+
+});
+router.post('/register',function (req, res) {
+
     userName = req.body.userName;
     password = req.body.password;
     //密码加密
@@ -60,22 +65,31 @@ router.post('/register',function (req, res) {
     loginService.registerUserInfo(userName,encryptoPassword,function (err, data) {
         if(err){
             console.log(err);
+
             logger.error('数据库查询出错->'+err);
+        }else if(data == null) {
+            logger.info(userName + "->已存在");
+            res.send(200, {flag: false, msg: "此用户已存在"});
         }else{
-            if(data == null){
-                logger.info(userName+"->已存在");
-                res.send(200,{flag:false,msg:"此用户已存在"});
-            }else{
                 var insertId = data.insertId;
                 if(insertId != undefined){
                     req.session.sys_user_id = insertId;
+
                     logger.info(userName+"->注册成功：id"+insertId);
                     res.send(200,{flag:true,msg:"注册成功"});
+
+                    // res.redirect('/login');
+                    res.send(200,{msg:"注册成功"});
+
                 }
             }
-        }
     });
     logger.info('退出注册post方法');
 
+});
+
+router.get('/loginOut',function (req, res) {
+    req.session.sys_user_id = null;
+    res.redirect('/login');
 });
 module.exports = router;
