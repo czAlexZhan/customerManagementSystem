@@ -5,6 +5,7 @@
     <title><%= title %> </title>
     <link rel="stylesheet" type="text/css" href="stylesheets/reset.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/customerInfo/home.css">
+    <link rel="stylesheet" type="text/css" href="javascripts/lib/newPaging/newPaging.css">
 </head>
 <body>
     <div class="body_bg" data-index="1">
@@ -26,7 +27,7 @@
                         <div><span style="padding-right:10px;">用户账号：</span><input type="text" id="account"></div>
                         <div><span style="padding-right:10px;">公司名称：</span><input type="text" id="target_name"></div>
                         <div><span style="padding-right:10px;">产品名称：</span><input type="text" id="product_name"></div>
-                        <div><span style="padding-right:10px;"></span><input type="checkbox" name="isDeal" id="isDeal" value="是否成交">&nbsp;&nbsp;是否成交</div>
+                        <div><input type="checkbox" id="isDeal" value="1">&nbsp;是否成交</div>
                     </div>
                     <div>
                         <div>
@@ -39,11 +40,33 @@
                             <input type="text" id="dealTimeStart" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'dealTimeEnd\')}'})"> 至
                             <input type="text" id="dealTimeEnd" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'dealTimeStart\')}'})">
                         </div>
+                        <div>
+                            <button id="searchBtn" onclick="findCustomerInfo()">查询</button>
+                        </div>
+                        <div>
+                            <button id="export">结果导出</button>
+                        </div>
                     </div>
                 </div>
-                <div id="search_results">
+                <!-- 搜索表单结束 -->
+                <!-- 搜索结果区域开始 -->
+                <div class="main_tab_container">
+                    <!-- 搜索结果 -->
+                    <div class="search_result">
+                        <div id="listView">
+                            <div id="listView1" class="present_tab_content">
 
+                            </div>
+                            <!-- 默认每页10条或20条记录 -->
+                            <div id="pageContent"></div>
+                            <!-- 分页组件 -->
+                            <div id="div_pager">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- 搜索结果区域结束 -->
             </div>
             <div id="record_table">
                 <div class="back"><span style="display: inline-block;width:100%;text-align: left;padding-left: 5px;"><a style="padding-right:10px;" href="javascript:void(0);" onclick="back(this)"> << 返回 </a>当前位置：&nbsp;&nbsp;新增记录</span></div>
@@ -74,6 +97,8 @@
     </div>
 </body>
 <script src="javascripts/lib/jquery-3.2.1.min.js"></script>
+<script src="javascripts/lib/jQuery-migrate-1.2.1.min.js"></script>
 <script src="javascripts/lib/date/wdatePicker.js"></script>
+<script src="javascripts/lib/newPaging/paging.js"></script>
 <script src="javascripts/customerInfo/index.js"></script>
 </html>

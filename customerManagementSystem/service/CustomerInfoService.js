@@ -7,4 +7,8 @@ module.exports = {
     insertCustomerInfo:function (list, callback) {
         customerInfoDao.insertCustomerInfo(list,callback);
     }
+    /**
+     * 查询记录（分页）
+     */
+
 };

@@ -53,10 +53,6 @@ router.route('/login').get(function(req,res){
     logger.info('退出登录post方法');
 });
 router.post('/register',function (req, res) {
-    logger.info('进入注册post方法');
-
-});
-router.post('/register',function (req, res) {
 
     userName = req.body.userName;
     password = req.body.password;
@@ -65,7 +61,6 @@ router.post('/register',function (req, res) {
     loginService.registerUserInfo(userName,encryptoPassword,function (err, data) {
         if(err){
             console.log(err);
-
             logger.error('数据库查询出错->'+err);
         }else if(data == null) {
             logger.info(userName + "->已存在");

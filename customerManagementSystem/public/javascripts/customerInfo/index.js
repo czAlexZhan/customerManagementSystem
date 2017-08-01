@@ -66,67 +66,62 @@ function delTr(dom) {
 function saveInfo() {
     var customerInfoList = new Array();
     var flag = true;
-
+    $('#addInfo .msg').text("");
     $('#addInfo .info').each(function () {
-        var account = $(this).find('.account').val() == null ? "" : $(this).find('.account').val();
-        var targetName = $(this).find('.target_name').val() == null ? "" : $(this).find('.target_name').val();
-        var dealTime = $(this).find('.deal_time').val() == null ? "" : $(this).find('.deal_time').val();
-        var connectTime = $(this).find('.connect_time').val() == null ? "" : $(this).find('.connect_time').val();
-        var productName = $(this).find('.product_name').val() == null ? "" : $(this).find('.product_name').val();
-        var productPrice = $(this).find('.product_price').val() == null ? "" : $(this).find('.product_price').val();
-        var isDeal = $(this).find('.isDeal').val() == null ? "" : $(this).find('.isDeal').val();
-        var dealTimes = $(this).find('.deal_times').val() == null ? "" : $(this).find('.deal_times').val();
-        var storeName = $(this).find('.store_name').val() == null ? "" : $(this).find('.store_name').val();
-        var isRepeat = $(this).find('.isRepeat').val() == null ? "" : $(this).find('.isRepeat').val();
-        var repeatName = $(this).find('.repeat_name').val() == null ? "" : $(this).find('.repeat_name').val();
+        var account = $(this).find('.account').val() == undefined ? "" : $(this).find('.account').val();
+        var targetName = $(this).find('.target_name').val() == undefined ? "" : $(this).find('.target_name').val();
+        var dealTime = $(this).find('.deal_time').val() == undefined ? "" : $(this).find('.deal_time').val();
+        var connectTime = $(this).find('.connect_time').val() == undefined ? "" : $(this).find('.connect_time').val();
+        var productName = $(this).find('.product_name').val() == undefined ? "" : $(this).find('.product_name').val();
+        var productPrice = $(this).find('.product_price').val() == undefined ? "" : $(this).find('.product_price').val();
+        var isDeal = $(this).find('.isDeal').val() == undefined ? "" : $(this).find('.isDeal').val();
+        var dealTimes = $(this).find('.deal_times').val() == undefined ? "" : $(this).find('.deal_times').val();
+        var storeName = $(this).find('.store_name').val() == undefined ? "" : $(this).find('.store_name').val();
+        var isRepeat = $(this).find('.isRepeat').val() == undefined ? "" : $(this).find('.isRepeat').val();
+        var repeatName = $(this).find('.repeat_name').val() == undefined ? "无" : $(this).find('.repeat_name').val();
 
         if(account == undefined || account == ""){
-            $(this).find('.account').siblings('msg').text('*');
+            $(this).find('.account').siblings('.msg').text('*');
             flag = false;
         }
         if(targetName == undefined || targetName == ""){
-            $(this).find('.target_name').siblings('msg').text('*');
+            $(this).find('.target_name').siblings('.msg').text('*');
             flag = false;
         }
         if(dealTime == undefined || dealTime == ""){
-            $(this).find('.deal_time').siblings('msg').text('*');
+            $(this).find('.deal_time').siblings('.msg').text('*');
             flag = false;
         }
         if(connectTime == undefined || connectTime == ""){
-            $(this).find('.connect_time').siblings('msg').text('*');
+            $(this).find('.connect_time').siblings('.msg').text('*');
             flag = false;
         }
         if(productName == undefined || productName == ""){
-            $(this).find('.connect_time').siblings('msg').text('*');
+            $(this).find('.connect_time').siblings('.msg').text('*');
             flag = false;
         }
         if(productPrice == undefined || productPrice == ""){
-            $(this).find('.product_price').siblings('msg').text('*');
+            $(this).find('.product_price').siblings('.msg').text('*');
             flag = false;
         }
         if(isDeal == undefined || isDeal == ""){
-            $(this).find('.isDeal').siblings('msg').text('*');
+            $(this).find('.isDeal').siblings('.msg').text('*');
             flag = false;
         }
         if(dealTimes == undefined || dealTimes == ""){
-            $(this).find('.deal_times').siblings('msg').text('*');
+            $(this).find('.deal_times').siblings('.msg').text('*');
             flag = false;
         }
         if(storeName == undefined || storeName == ""){
-            $(this).find('.store_name').siblings('msg').text('*');
+            $(this).find('.store_name').siblings('.msg').text('*');
             flag = false;
         }
         if(isRepeat == undefined || isRepeat == ""){
-            $(this).find('.isRepeat').siblings('msg').text('*');
+            $(this).find('.isRepeat').siblings('.msg').text('*');
             flag = false;
         }
-        if(repeatName == undefined || repeatName == ""){
-            $(this).find('.repeat_name').siblings('msg').text('*');
-            flag = false;
-        }
-
         if(flag){
-            var customerInfo = new Array(account, targetName, dealTime, connectTime, productName, productPrice, isDeal, dealTimes, storeName, isRepeat, repeatName);
+            var customerInfo = new Array(account, targetName, dealTime, connectTime, productName, productPrice, isDeal, dealTimes, storeName, isRepeat, repeatName,"A");
             customerInfoList.push(customerInfo);
         }
     });
@@ -142,13 +137,49 @@ function saveInfo() {
             data:JSON.stringify(data),
             success:function(data){
               alert(data.msg);
+              window.location.reload();
             },
             error:function(err){
                 console.log(err)
             }
         });
     }
+}
+function findCustomerInfo(){
+    var customer_account = $('#account').val();
+    var target_name = $('#target_name').val();
+    var product_name = $('#product_name').val();
+    var isDeal = $('#isDeal:checked').val();
+    if(isDeal == undefined){
+        isDeal = "0";
+    }
+    var connectTimeStart = $('#connectTimeStart').val();
+    var connectTimeEnd = $('#connectTimeEnd').val();
+    var dealTimeStart = $('#dealTimeStart').val();
+    var dealTimeEnd = $('#dealTimeEnd').val();
 
+    var actionName = '/customerInfoAction/findCustomerInfoAction';
+    var pageDivId = 'pageContent';
+    var showDivId = 'listView1';
+    var currentPage = 1;
+    var pageSize = 10;
 
+    var param = {
+        customer_account:customer_account,
+        target_name:target_name,
+        product_name:product_name,
+        isDeal:isDeal,
+        connectTimeStart:connectTimeStart,
+        connectTimeEnd:connectTimeEnd,
+        dealTimeStart:dealTimeStart,
+        dealTimeEnd:dealTimeEnd,
 
+        currentPage:currentPage,
+        pageSize:pageSize
+    };
+    pager.init({
+        param:param,
+        actionName:actionName,
+        resultId:showDivId
+    });
 }

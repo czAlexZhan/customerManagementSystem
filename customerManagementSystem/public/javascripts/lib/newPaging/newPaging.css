@@ -1,0 +1,187 @@
+#div_pager {
+	line-height: 60px;
+	border-top: 1px solid #ccc;
+	text-align: center;
+	background: #ebebeb;
+}
+
+#div_pager a {
+	padding: 4px 8px;
+	margin: 10px 3px;
+	font-size: 12px;
+	border: 1px solid #f4f4f4;
+	background-color: #f4f4f4;
+	color: #666666;
+	text-decoration: none;
+}
+
+#div_pager span img {
+	vertical-align: -0.1em;
+}
+
+#div_pager a img {
+	vertical-align: -0.2em;
+}
+
+#div_pager span.goFirst {
+	padding:4px 12px;
+	margin: 10px 3px;
+	font-size: 12px;
+	border: 1px solid #f4f4f4;
+	background-color: #f4f4f4;
+	color: #999999;
+	
+}
+
+#div_pager a.goFirst {
+	padding: 4px 12px;
+	margin: 10px 3px;
+	font-size: 12px;
+	border: 1px solid #f4f4f4;
+	background-color: #f4f4f4;
+	color: #666666;
+	text-decoration: none;
+}
+
+#div_pager span {
+	padding: 4px 8px;
+	margin: 10px 3px;
+	font-size: 12px;
+	color: #666666;
+}
+
+#div_pager span.disabled {
+	padding: 4px 8px;
+	margin: 10px 3px;
+	font-size: 12px;
+	border: 1px solid #f4f4f4;
+	background-color: #f4f4f4;
+	color: #999999;
+}
+
+#div_pager span.curr {
+	padding: 4px 8px;
+	margin: 10px 3px;
+	font-size: 12px;
+	border: 1px solid #a9b3c0;
+	background-color: #a9b3c0;
+	color: #ffffff;
+}
+
+#div_pager a:hover {
+	border: 1px solid #a9b3c0;
+}
+
+#div_pager span.normalsize {
+	font-size: 13px;
+}
+
+#div_pager input#btn_go_input,#div_pager input.btn_go_input {
+	width: 50px;
+	height: 18px;
+	color: #999999;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#div_pager input#btn_go,#div_pager input.btn_go {
+	margin-left: 10px;
+	width: 45px;
+	border-radius: 3px;
+}
+
+/* jBox上分页组件
+---------------------------------------*/
+#jBox_pager {
+	line-height: 60px;
+	border-top: 1px solid #ccc;
+	text-align: center;
+	background: #ebebeb;
+}
+
+#jBox_pager a {
+	padding: 4px 8px;
+	margin: 10px 3px;
+	font-size: 12px;
+	border: 1px solid #f4f4f4;
+	background-color: #f4f4f4;
+	color: #666666;
+	text-decoration: none;
+}
+
+#jBox_pager span img {
+	vertical-align: -0.1em;
+}
+
+#jBox_pager a img {
+	vertical-align: -0.2em;
+}
+
+#jBox_pager span.goFirst {
+	padding:4px 12px;
+	margin: 10px 3px;
+	font-size: 12px;
+	border: 1px solid #f4f4f4;
+	background-color: #f4f4f4;
+	color: #999999;
+	
+}
+
+#jBox_pager a.goFirst {
+	padding: 4px 12px;
+	margin: 10px 3px;
+	font-size: 12px;
+	border: 1px solid #f4f4f4;
+	background-color: #f4f4f4;
+	color: #666666;
+	text-decoration: none;
+}
+
+#jBox_pager span {
+	padding: 4px 8px;
+	margin: 10px 3px;
+	font-size: 12px;
+	color: #666666;
+}
+
+#jBox_pager span.disabled {
+	padding: 4px 8px;
+	margin: 10px 3px;
+	font-size: 12px;
+	border: 1px solid #f4f4f4;
+	background-color: #f4f4f4;
+	color: #999999;
+}
+
+#jBox_pager span.curr {
+	padding: 4px 8px;
+	margin: 10px 3px;
+	font-size: 12px;
+	border: 1px solid #a9b3c0;
+	background-color: #a9b3c0;
+	color: #ffffff;
+}
+
+#jBox_pager a:hover {
+	border: 1px solid #a9b3c0;
+}
+
+#jBox_pager span.normalsize {
+	font-size: 13px;
+}
+
+#jBox_pager input#jBox_btn_go_input {
+	width: 50px;
+	height: 18px;
+	color: #999999;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#jBox_pager input#jBox_btn_go {
+	margin-left: 10px;
+	width: 45px;
+	border-radius: 3px;
+}

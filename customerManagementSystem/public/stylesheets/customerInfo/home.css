@@ -114,7 +114,9 @@
     box-shadow: 0 1px 11px #4a4a4a
 }
 .search_area{
-    padding:20px 0;
+    padding: 20px 0;
+    border-bottom: 1px solid red;
+    box-shadow: 0 1px 10px -2px red;
 }
 .search_area > div{
     display: flex;
@@ -123,7 +125,7 @@
     margin: 10px 0;
 }
 .search_area > div >div{
-    margin-left:54px;
+    margin-left:34px;
 }
 #addInfo tr th,#addInfo tr td{
     border:1px solid #cccccc;
@@ -138,8 +140,9 @@
     outline: none;
 }
 #saveBtn{
-    width: 80px;
-    height: 30px;
+    margin-top: 5px;
+    width: 60px;
+    height: 24px;
     background: #e84b4b;
     outline: none;
     border: none;
@@ -152,4 +155,28 @@
 }
 .info td input{
     text-align: center;
+}
+.msg{
+    color: #ff0000;
+}
+#searchBtn{
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background: #ff8c16;
+    width: 60px;
+    color: #fff;
+}
+#export{
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background: #2fff1f;
+    width: 60px;
+    color: #fff;
+}
+#export:hover,#searchBtn:hover{
+    opacity: 0.8;
 }
