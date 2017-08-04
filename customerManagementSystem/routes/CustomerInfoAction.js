@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const customerInfoService = require('../service/CustomerInfoService');
 const logger = require('../service/LogService').logger('customerAction');
+const ph = require('../service/PagingHelper');
 
 /* GET users listing. */
 router.get('/',function(req,res){
@@ -35,6 +36,7 @@ router.post('/addCustomerInfoAction',function (req, res) {
 });
 router.post('/findCustomerInfoAction',function (req, res) {
     logger.info('进入查询用户记录方法 findCustomerInfoAction');
+    var data;
     let customer_account = req.body.customer_account;
     let target_name = req.body.target_name;
     let product_name = req.body.product_name;
@@ -56,5 +58,20 @@ router.post('/findCustomerInfoAction',function (req, res) {
     searchMap.set('dealTimeStart',dealTimeStart);
     searchMap.set('dealTimeEnd',dealTimeEnd);
 
+    asyncFindCustomerInfo(searchMap,currentPage,pageSize,true).then(function (data) {
+        res.render('customerInfoListTable',{data:data});
+    });
 });
+var asyncFindCustomerInfo = async function(searchMap,currentPage,pageSize,isPaging){
+  var data = {};
+  var list = await customerInfoService.findCustomerInfoList(searchMap,currentPage,pageSize,isPaging);
+  var count = await customerInfoService.findCustomerInfoListCount(searchMap);
+  data.list = list;
+  data.countPage = ph.calculatePagingParamService(count,currentPage,pageSize);
+  for(var i of list){
+      console.log(typeof i);
+      console.log(i);
+  }
+  return data;
+};
 module.exports = router;

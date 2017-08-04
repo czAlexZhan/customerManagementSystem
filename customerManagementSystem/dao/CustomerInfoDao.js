@@ -31,39 +31,109 @@ module.exports = {
             }
         });
     },
-    findCustomerInfoList:function (searchMap, currentPage, pageSize,callback) {
+    findCustomerInfoList:function (searchMap, currentPage, pageSize,isPaging,callback) {
         global.sqlPool.getConnection(function(err,connection){
             if(err){
                 console.log(err);
+                callback(err);
             }else if(connection && 'query' in connection){
                 var whereSql = "";
                 if(searchMap != null && searchMap.size>0){
-                    if(searchMap.get('customer_account') != null){
-                        whereSql += " and customer_account like'%"+earchMap.get('customer_account')+"%'";
+                    if(searchMap.get('customer_account') != null && searchMap.get('customer_account') != ""){
+                        whereSql += " and customer_account like'%"+searchMap.get('customer_account')+"%'";
                     }
-                    if(searchMap.get('target_name') != null){
+                    if(searchMap.get('target_name') != null && searchMap.get('target_name') != ""){
                         whereSql += " and target_name like'%"+searchMap.get('target_name')+"%'";
                     }
-                    if(searchMap,get('product_name') != null){
-                        whereSql += " and product_name like'%"+earchMap,get('product_name')+"%'";
+                    if(searchMap.get('product_name') != null && searchMap.get('product_name') != ""){
+                        whereSql += " and product_name like'%"+searchMap.get('product_name')+"%'";
                     }
                     if(searchMap.get('isDeal') != null && searchMap.get('isDeal')=="1"){
                         whereSql += " and isdeal='是'";
                     }
-                    if(searchMap.get('connectTimeStart') != null){
-                        whereSql += " and date_format(connect_time,%Y-%m-%d %H:%i:%s) >= '"+earchMap.get('connectTimeStart')+"'";
+                    if(searchMap.get('connectTimeStart') != null && searchMap.get('connectTimeStart') != ""){
+                        whereSql += " and date_format(connect_time,%Y-%m-%d %H:%i:%s) >= '"+searchMap.get('connectTimeStart')+"'";
                     }
-                    if(searchMap.get('connectTimeEnd') != null){
-                        whereSql += " and date_format(connect_time,%Y-%m-%d %H:%i:%s) <= '"+earchMap.get('connectTimeEnd')+"'";
+                    if(searchMap.get('connectTimeEnd') != null && searchMap.get('connectTimeEnd') != ""){
+                        whereSql += " and date_format(connect_time,%Y-%m-%d %H:%i:%s) <= '"+searchMap.get('connectTimeEnd')+"'";
                     }
-                    if(searchMap.get('dealTimeStart') != null){
-                        whereSql += " and date_format(deal_time,%Y-%m-%d %H:%i:%s) >= '"+earchMap.get('dealTimeStart')+"'";
+                    if(searchMap.get('dealTimeStart') != null && searchMap.get('dealTimeStart') != ""){
+                        whereSql += " and date_format(deal_time,%Y-%m-%d %H:%i:%s) >= '"+searchMap.get('dealTimeStart')+"'";
                     }
-                    if(searchMap.get('dealTimeEnd') != null){
-                        whereSql += " and date_format(deal_time,%Y-%m-%d %H:%i:%s) <= '"+earchMap.get('dealTimeEnd')+"'";
+                    if(searchMap.get('dealTimeEnd') != null && searchMap.get('dealTimeEnd') != ""){
+                        whereSql += " and date_format(deal_time,%Y-%m-%d %H:%i:%s) <= '"+searchMap.get('dealTimeEnd')+"'";
                     }
                 }
+                var maxnum = 0;
+                var minnum = 0;
+                if(isPaging){
+                    minnum = (currentPage - 1) * pageSize;
+                    if(minnum != 0){
+                        minnum = minnum + 1;
+                    }else {
+                        minnum = minnum;
+                    }
+                    maxnum = currentPage * pageSize;
+                }
+                var sql = "select * from sys_customerinfo where 1=1"+whereSql+" and status='A' limit "+minnum+","+maxnum;
+                connection.query(sql,function(err,results){
+                    if(err){
+                        console.log(err);
+                        callback(err);
+                    }else{
+                        callback(null,results);
+                    }
+                    connection.release();
+                });
 
+            }
+        });
+    },
+    findCustomerInfoCount:function(searchMap,callback){
+        global.sqlPool.getConnection(function(err,connection){
+            if(err){
+                console.log(err);
+                callback(err);
+            }else if(connection && 'query' in connection){
+                var whereSql = "";
+                if(searchMap != null && searchMap.size>0){
+                    if(searchMap.get('customer_account') != null && searchMap.get('customer_account') != ""){
+                        whereSql += " and customer_account like'%"+searchMap.get('customer_account')+"%'";
+                    }
+                    if(searchMap.get('target_name') != null && searchMap.get('target_name') != ""){
+                        whereSql += " and target_name like'%"+searchMap.get('target_name')+"%'";
+                    }
+                    if(searchMap.get('product_name') != null && searchMap.get('product_name') != ""){
+                        whereSql += " and product_name like'%"+searchMap.get('product_name')+"%'";
+                    }
+                    if(searchMap.get('isDeal') != null && searchMap.get('isDeal')=="1"){
+                        whereSql += " and isdeal='是'";
+                    }
+                    if(searchMap.get('connectTimeStart') != null && searchMap.get('connectTimeStart') != ""){
+                        whereSql += " and date_format(connect_time,%Y-%m-%d %H:%i:%s) >= '"+searchMap.get('connectTimeStart')+"'";
+                    }
+                    if(searchMap.get('connectTimeEnd') != null && searchMap.get('connectTimeEnd') != ""){
+                        whereSql += " and date_format(connect_time,%Y-%m-%d %H:%i:%s) <= '"+searchMap.get('connectTimeEnd')+"'";
+                    }
+                    if(searchMap.get('dealTimeStart') != null && searchMap.get('dealTimeStart') != ""){
+                        whereSql += " and date_format(deal_time,%Y-%m-%d %H:%i:%s) >= '"+searchMap.get('dealTimeStart')+"'";
+                    }
+                    if(searchMap.get('dealTimeEnd') != null && searchMap.get('dealTimeEnd') != ""){
+                        whereSql += " and date_format(deal_time,%Y-%m-%d %H:%i:%s) <= '"+searchMap.get('dealTimeEnd')+"'";
+                    }
+                }
+                var sql = "select count(*) count from sys_customerinfo where 1=1"+whereSql+" and status='A'";
+                connection.query(sql,function(err,results){
+                    if(err){
+                        console.log(err);
+                        callback(err);
+                    }else{
+                        if(results.length>0){
+                            callback(null,results[0].count);
+                        }
+                    }
+                    connection.release();
+                });
             }
         });
     }

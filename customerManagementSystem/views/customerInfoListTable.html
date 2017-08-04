@@ -1,0 +1,59 @@
+<style>
+    .table-bordered{
+        width:100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+    .table-bordered .headTr{
+        background:#eff5fd;
+    }
+    .table-bordered tr th,.table-bordered tr td{
+        border: 1px solid #e0e0e0;
+        padding: 8px;
+        line-height: 1.42857143;
+        vertical-align: middle;
+    }
+</style>
+<input type="hidden" id="totalPage" value='<%= data.countPage %>'>
+<table class="table-bordered table" style="margin-bottom: 0;">
+    <thead>
+        <tr class="headTr">
+            <th>用户账号</th>
+            <th>公司名称</th>
+            <th>成交时间</th>
+            <th>联系时间</th>
+            <th>产品名称</th>
+            <th>产品价格</th>
+            <th>是否成交</th>
+            <th>成交次数</th>
+            <th>店铺</th>
+            <th>是否重复</th>
+            <th>重复名</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if(data.list.lenght>0) { %>
+            <% for(var i=0;i< data.list.lenght;i++){ %>
+                <tr>
+                    <td><%= data.list[i].CUSTOMER.ACCOUNT %></td>
+                    <td><%= data.list[i].TARGET_NAME %></td>
+                    <td><%= data.list[i].DEAL_TIME %></td>
+                    <td><%= data.list[i].CONNECT_TIME %></td>
+                    <td><%= data.list[i].PRODUCT_NAME %></td>
+                    <td><%= data.list[i].PRODUCT_PRICE %></td>
+                    <td><%= data.list[i].ISDEAL %></td>
+                    <td><%= data.list[i].DEAL_TIMES　%></td>
+                    <td><%= data.list[i].STORE_NAME %></td>
+                    <td><%= data.list[i].ISREPEAT %></td>
+                    <td><%= data.list[i].REPEATNAME %></td>
+                    <td>
+                        <a href="javascript:void(0);">查看</a>
+                        <a href="javascript:void(0);">删除</a>
+                    </td>
+                </tr>
+            <% } %>
+        <% } %>
+    </tbody>
+</table>
