@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 
 var loginAction = require('./routes/LoginAction');
 var customerInfoAction = require('./routes/CustomerInfoAction');
+var importCustomerInfoAction = require('./routes/ImportCustomerInfoAction');
 
 global.sqlPool = require('./service/MysqlService');
 
@@ -21,7 +22,7 @@ app.engine('html',require("ejs").__express);
 app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -41,6 +42,7 @@ app.use(session({
 //Action
 app.use('/', loginAction);
 app.use('/customerInfoAction', customerInfoAction);
+app.use('/importCustomerInfoAction', importCustomerInfoAction);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -8,7 +8,7 @@ var $record_table = $('#record_table');
 
 $('#changeBg button').on('click',function () {
    var index = Number($('.body_bg').attr('data-index'));
-   if(index == 3){
+   if(index == 5){
        var url = "url('../../images/bg_1.jpg')";
        $('.body_bg').css({'background':url,'background-size':'cover'});
        $('.body_bg').attr('data-index','1');
