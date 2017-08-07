@@ -60,7 +60,24 @@ router.post('/findCustomerInfoAction',function (req, res) {
 
     asyncFindCustomerInfo(searchMap,currentPage,pageSize,true).then(function (data) {
         res.render('customerInfoListTable',{data:data});
+    }).catch(function (err) {
+        logger.error('查询用户记录方法'+err);
     });
+});
+router.post('/deleteCustomerInfo',function (req, res) {
+    logger.info('进入删除用户记录方法 deleteCustomerInfo');
+    let id = req.body.id;
+    customerInfoService.deleteCustomerInfo(id,function (err, results) {
+        if(err){
+            logger.error('删除用户记录方法'+err);
+        }else{
+            if(results.affectedRows > 0){
+                res.send(200,{flag:true,msg:'删除成功'});
+            }else{
+                res.send(200,{flag:false,msg:'删除失败'});
+            }
+        }
+    })
 });
 var asyncFindCustomerInfo = async function(searchMap,currentPage,pageSize,isPaging){
   var data = {};
@@ -68,10 +85,6 @@ var asyncFindCustomerInfo = async function(searchMap,currentPage,pageSize,isPagi
   var count = await customerInfoService.findCustomerInfoListCount(searchMap);
   data.list = list;
   data.countPage = ph.calculatePagingParamService(count,currentPage,pageSize);
-  for(var i of list){
-      console.log(typeof i);
-      console.log(i);
-  }
   return data;
 };
 module.exports = router;

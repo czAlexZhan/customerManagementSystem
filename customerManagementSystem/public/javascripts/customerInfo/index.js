@@ -183,3 +183,26 @@ function findCustomerInfo(){
         resultId:showDivId
     });
 }
+function deleteCustomerInfo(id){
+    if(id != 0 && id != undefined){
+        if(confirm("确定删除此记录？")){
+            $.ajax({
+                url:'/customerInfoAction/deleteCustomerInfo',
+                type:'post',
+                data:{id:id},
+                dataType:'json',
+                success:function (data) {
+                    if(data.flag){
+                        alert(data.msg);
+                        findCustomerInfo();
+                    }else {
+                        alert(data.msg);
+                    }
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            })
+        }
+    }
+}

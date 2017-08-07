@@ -34,10 +34,11 @@
         </tr>
     </thead>
     <tbody>
-        <% if(data.list.lenght>0) { %>
-            <% for(var i=0;i< data.list.lenght;i++){ %>
+        <% if(data.list.length>0) { %>
+
+            <% for(var i=0;i< data.list.length;i++){ %>
                 <tr>
-                    <td><%= data.list[i].CUSTOMER.ACCOUNT %></td>
+                    <td><%= data.list[i].CUSTOMER_ACCOUNT %></td>
                     <td><%= data.list[i].TARGET_NAME %></td>
                     <td><%= data.list[i].DEAL_TIME %></td>
                     <td><%= data.list[i].CONNECT_TIME %></td>
@@ -49,8 +50,8 @@
                     <td><%= data.list[i].ISREPEAT %></td>
                     <td><%= data.list[i].REPEATNAME %></td>
                     <td>
-                        <a href="javascript:void(0);">查看</a>
-                        <a href="javascript:void(0);">删除</a>
+                        <a href="/viewCustomerInfoAction?id=<%= data.list[i].ID %>"> 查看</a>
+                        <a href="javascript:void(0);" onclick="deleteCustomerInfo(<%= data.list[i].ID %>)">删除</a>
                     </td>
                 </tr>
             <% } %>

@@ -28,5 +28,11 @@ module.exports = {
               resolve(results);
            });
         });
+    },
+    /**
+     * 删除用户记录
+     */
+    deleteCustomerInfo:function(id,callback){
+        customerInfoDao.deleteCustomerInfo(id,callback);
     }
 };
