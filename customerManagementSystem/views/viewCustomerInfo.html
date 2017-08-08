@@ -3,11 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>查看编辑用户记录</title>
+    <style>
+        .table .title{
+
+        }
+        .table .label{
+            background: #eff5fd none no-repeat scroll 0 0;
+            width: 180px;
+        }
+        .title td{
+            border: solid 1px #e0e0e0;
+            padding: 0px 0 0px 15px;
+            font-size: 12px;
+            color: #333333;
+            background: #ffffff no-repeat 0 0;
+        }
+    </style>
 </head>
 <body>
     <div class="wrap">
         <div class="table">
-
+            <table>
+                <thead>
+                    <tr class="title"><th colspan="4">编辑用户记录</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="label">用户账号</td>
+                        <td><input type="text" class="account" value="<%= data.CUSTOMER_ACCOUNT %>"></td>
+                        <td class="label">公司名称</td>
+                        <td><input type="text" class="target_name" value="<%= data.TARGET_NAME %>"></td>
+                    </tr>
+                    <tr>
+                        <td class="label">成交时间</td>
+                        <td><input type="text" class="product_name" value="<%= data.DEAL_TIME %>"></td>
+                        <td class="label">联系时间</td>
+                        <td><%= data.CONNECT_TIME ></td>
+                    </tr>
+                    <tr>
+                        <td class="label">产品名称</td>
+                        <td><input type="text" class="product_name" value="<%= data.PRODUCT_NAME %>"></td>
+                        <td class="label">产品价格</td>
+                        <td><input type="text" class="product_price" value="<%= data.PRODUCT_PRICE %>"></td>
+                    </tr>
+                    <tr>
+                        <td class="label">是否成交</td>
+                        <td><input type="text" class="isDeal" value="<%= data.ISDEAL %>"></td>
+                        <td class="label">成交次数</td>
+                        <td><input type="text" class="deal_times" value="<%= data.PRODUCT_PRICE %>"></td>
+                    </tr>
+                    <tr>
+                        <td class="label">是否重复</td>
+                        <td><input type="text" class="isRepeat" value="<%= data.PRODUCT_PRICE %>"></td>
+                        <td class="label">重复名</td>
+                        <td><input type="text" class="repeat_name" value="<%= data.PRODUCT_PRICE %>"></td>
+                    </tr>
+                    <tr>
+                        <td class="label">店铺</td>
+                        <td colspan="3"><input type="text" class="store_name" value="<%= data.STORE_NAME %>"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
