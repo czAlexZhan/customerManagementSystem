@@ -111,7 +111,24 @@
     color: #666;
     height: 33px;
     line-height: 33px;
-    box-shadow: 0 1px 11px #4a4a4a
+    box-shadow: 0 1px 11px #4a4a4a;
+    position: relative;
+}
+.importExcel{
+    position: absolute;
+    right: 10px;
+    bottom: 3px;
+    background: #32da58;
+    display: inline-block;
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    color: #4a4a4a;
+    border-radius: 5px;
+}
+.importExcel:hover{
+    background: red;
+    color: #FFFFFF;
 }
 .search_area{
     padding: 20px 0;
