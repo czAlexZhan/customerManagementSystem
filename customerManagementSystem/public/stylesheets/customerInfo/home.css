@@ -111,7 +111,25 @@
     color: #666;
     height: 33px;
     line-height: 33px;
-    box-shadow: 0 1px 11px #4a4a4a
+    box-shadow: 0 1px 11px #4a4a4a;
+    position: relative;
+}
+#import{
+    position: absolute;
+    width: 83px;
+    height: 24px;
+    line-height: 24px;
+    background: #2fff1f;
+    color: #FFFFFF;
+    right: 5px;
+    bottom: 4px;
+    border-radius: 5px;
+    text-align: center;
+}
+#import:hover{
+    background: red;
+    text-decoration: none;
+    cursor: pointer;
 }
 .search_area{
     padding: 20px 0;

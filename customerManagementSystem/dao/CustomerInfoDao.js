@@ -154,5 +154,39 @@ module.exports = {
                 })
             }
         });
+    },
+    getCustomerInfoById:function(id,callback){
+        global.sqlPool.getConnection(function(err,connection){
+            if(err){
+                callback(err);
+            }else if(connection && 'query' in connection){
+                var sql = "select ID,CUSTOMER_ACCOUNT,TARGET_NAME,DATE_FORMAT(DEAL_TIME,'%Y-%m-%d %H:%i:%s') DEAL_TIME,DATE_FORMAT(CONNECT_TIME,'%Y-%m-%d %H:%i:%s') CONNECT_TIME ,PRODUCT_NAME,PRODUCT_PRICE," +
+                    "ISDEAL,DEAL_TIMES,STORE_NAME,ISREPEAT,REPEAT_NAME from sys_customerinfo where id="+id+" and status='A'";
+                connection.query(sql,function(err,results){
+                   if(err){
+                       callback(err);
+                   } else{
+                       callback(null,results);
+                   }
+                   connection.release();
+                });
+            }
+        });
+    },
+    getPhotosByCustomerId:function(id,callback){
+        global.sqlPool.getConnection(function(err,connection){
+            if(err){
+                callback(err);
+            }else if(connection &&　'query' in connection){
+                var sql ="select * from sys_photo where rela_customer_id="+id+" and status='A'";
+                connection.query(sql,function(err,results){
+                    if(err){
+                        callback(err);
+                    }else{
+                        callback(null,results);
+                    }
+                });
+            }
+        });
     }
 };

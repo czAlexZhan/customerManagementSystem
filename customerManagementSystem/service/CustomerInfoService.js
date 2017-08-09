@@ -34,5 +34,17 @@ module.exports = {
      */
     deleteCustomerInfo:function(id,callback){
         customerInfoDao.deleteCustomerInfo(id,callback);
+    },
+    /**
+     * 根据id获取用户记录
+     */
+    getCustomerInfoById:function(id,callback){
+        customerInfoDao.getCustomerInfoById(id,callback);
+    },
+    /**
+     * 根据记录id获取关联记录图片
+     */
+    getPhotosByCustomerId(id,callback){
+        customerInfoDao.getPhotosByCustomerId(id,callback);
     }
 };

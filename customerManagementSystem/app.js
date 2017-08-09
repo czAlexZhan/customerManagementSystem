@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var loginAction = require('./routes/LoginAction');
 var customerInfoAction = require('./routes/CustomerInfoAction');
 var importCustomerInfoAction = require('./routes/ImportCustomerInfoAction');
+var viewCustomerInfoAction = require('./routes/ViewCuctomerInfoAction');
 
 global.sqlPool = require('./service/MysqlService');
 
@@ -43,6 +44,7 @@ app.use(session({
 app.use('/', loginAction);
 app.use('/customerInfoAction', customerInfoAction);
 app.use('/importCustomerInfoAction', importCustomerInfoAction);
+app.use('/viewCustomerInfoAction',viewCustomerInfoAction);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -3,68 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <title>查看编辑用户记录</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.css">
     <style>
-        .table .title{
-
+        body{
+            width:100vw;
+            height:100vh;
+        }
+        .wrap{
+            background: url("images/bg_4.jpg");
+            background-size: cover;
+            width:100%;
+            height:100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .table,.photos{
+            width: 800px;
+            background: #FFFFFF;
+        }
+        .table{
+            border-radius: 5px 5px 0 0;
+        }
+        .photos{
+            padding-top: 10px;
+            border-radius: 0 0 5px 5px;
+        }
+        .title{
+            height: 31px;
+            background: none repeat scroll 0 0 #DCDCDC;
+            width: 798px;
+            border: solid 1px #CCCCCC;
+            border-radius: 5px;
+            margin-bottom:13px;
+        }
+        .title div{
+            width:140px;
+            /*height: 40px;*/
+            color: #FFFFFF;
+            line-height: 31px;
+            text-align: center;
+            position: relative;
+            background: #1368ac;
+            border-radius: 5px;
+        }
+        .title div:after{
+            width:0;
+            height: 0;
+            content: "";
+            border: 10px solid;
+            border-color: #1368ac transparent transparent transparent;
+            position: absolute;
+            bottom:-20px;
+            left: 50%;
         }
         .table .label{
-            background: #eff5fd none no-repeat scroll 0 0;
+            background: #bfdbff  none no-repeat scroll 0 0;
             width: 180px;
         }
-        .title td{
+        .table td{
             border: solid 1px #e0e0e0;
             padding: 0px 0 0px 15px;
             font-size: 12px;
             color: #333333;
             background: #ffffff no-repeat 0 0;
         }
+        #saveBtn{
+            display: inline-block;
+            margin-top: 5px;
+            width: 60px;
+            height: 24px;
+            background: #e84b4b;
+            outline: none;
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #saveBtn:hover{
+            background: #699ef3;
+        }
+        .photos_list {
+            background: #eaeaea;
+        }
+        .photos_list div{
+            display: inline-block;
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="wrap">
-        <div class="table">
-            <table>
-                <thead>
-                    <tr class="title"><th colspan="4">编辑用户记录</th></tr>
-                </thead>
-                <tbody>
+        <div style="background: white;border-radius: 5px;">
+            <div class="table">
+                <div class="title"><div>编辑用户记录</div></div>
+                <table width="100%" style="border-collapse: collapse">
+                    <input type="hidden" id="id" value="<%= data.ID %>">
+                    <tbody>
                     <tr>
                         <td class="label">用户账号</td>
-                        <td><input type="text" class="account" value="<%= data.CUSTOMER_ACCOUNT %>"></td>
+                        <td><input type="text" class="account" value='<%= data.CUSTOMER_ACCOUNT %>' ></td>
                         <td class="label">公司名称</td>
-                        <td><input type="text" class="target_name" value="<%= data.TARGET_NAME %>"></td>
+                        <td><input type="text" class="target_name" value='<%= data.TARGET_NAME %>' ></td>
                     </tr>
                     <tr>
                         <td class="label">成交时间</td>
-                        <td><input type="text" class="product_name" value="<%= data.DEAL_TIME %>"></td>
+                        <td><input type="text" class="product_name" value='<%= data.DEAL_TIME %>' onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
                         <td class="label">联系时间</td>
-                        <td><%= data.CONNECT_TIME ></td>
+                        <td><%= data.CONNECT_TIME %></td>
                     </tr>
                     <tr>
                         <td class="label">产品名称</td>
-                        <td><input type="text" class="product_name" value="<%= data.PRODUCT_NAME %>"></td>
+                        <td><input type="text" class="product_name" value='<%= data.PRODUCT_NAME %>' ></td>
                         <td class="label">产品价格</td>
-                        <td><input type="text" class="product_price" value="<%= data.PRODUCT_PRICE %>"></td>
+                        <td><input type="text" class="product_price" value='<%= data.PRODUCT_PRICE %>' ></td>
                     </tr>
                     <tr>
                         <td class="label">是否成交</td>
-                        <td><input type="text" class="isDeal" value="<%= data.ISDEAL %>"></td>
+                        <td><input type="text" class="isDeal" value='<%= data.ISDEAL %>' ></td>
                         <td class="label">成交次数</td>
-                        <td><input type="text" class="deal_times" value="<%= data.PRODUCT_PRICE %>"></td>
+                        <td><input type="text" class="deal_times" value='<%= data.DEAL_TIMES %>' ></td>
                     </tr>
                     <tr>
                         <td class="label">是否重复</td>
-                        <td><input type="text" class="isRepeat" value="<%= data.PRODUCT_PRICE %>"></td>
+                        <td><input type="text" class="isRepeat" value='<%= data.ISREPEAT %>' ></td>
                         <td class="label">重复名</td>
-                        <td><input type="text" class="repeat_name" value="<%= data.PRODUCT_PRICE %>"></td>
+                        <td><input type="text" class="repeat_name" value='<%= data.REPEAT_NAME %>' ></td>
                     </tr>
                     <tr>
-                        <td class="label">店铺</td>
-                        <td colspan="3"><input type="text" class="store_name" value="<%= data.STORE_NAME %>"></td>
+                        <td class="label" >店铺</td>
+                        <td colspan="3" align="left" style="padding-left: 44px;"><input type="text" class="store_name" value='<%= data.STORE_NAME %>' ></td>
                     </tr>
-                </tbody>
-            </table>
+                    <tr>
+                        <td class="label">聊天记录</td>
+                        <td colspan="3" align="left" style="padding-left: 44px;">
+                            <div><a href="javascript:void(0);" onclick="addInput(this)">新增上传</a></div>
+                            <div>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="photos">
+                <div class="title"><div>相关附件</div></div>
+                <div class="photos_list">
+
+                </div>
+            </div>
+            <div style="text-align: center;padding-bottom: 10px;"><button id="saveBtn">保存</button></div>
         </div>
     </div>
 </body>
+<script src="javascripts/lib/jquery-3.2.1.min.js"></script>
+<script src="javascripts/lib/date/wdatePicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var id = $('#id').val();
+        getCustomerInfoPhotos(id);
+    });
+    function getCustomerInfoPhotos(id){
+        if(id != undefined && id !== '0'){
+            $.ajax({
+                url:'/viewCustomerInfoAction/getPhotosAction',
+                type:'post',
+                data:{id:id},
+                success:function(data){
+                    $('.photos_list').append(data);
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
+        }
+    }
+    function addInput(dom){
+
+    }
+</script>
 </html>

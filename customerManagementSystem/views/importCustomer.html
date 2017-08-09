@@ -58,7 +58,7 @@
                 <form id="importForm" action="/importCustomerInfoAction/importAction" method="post" enctype="multipart/form-data">
                     <label for="file">请选择要导入的excel文件：</label>
                     <input id="file" name="file" type="file">
-                    <input type="button" id="import">导入</input>
+                    <input type="button" id="import" value="导入">
                 </form>
                 <div class="msg">
 
@@ -66,6 +66,7 @@
             </div>
         </div>
     </div>
+    <script src="javascripts/lib/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="javascripts/lib/jquery.form.js"></script>
 <script type="text/javascript">
     function checkInvoInfoExcel(){

@@ -88,10 +88,10 @@ function saveInfo() {
             $(this).find('.target_name').siblings('.msg').text('*');
             flag = false;
         }
-        // if(dealTime == undefined || dealTime == ""){
-        //     $(this).find('.deal_time').siblings('.msg').text('*');
-        //     flag = false;
-        // }
+        if(dealTime == undefined || dealTime == ""){
+            $(this).find('.deal_time').siblings('.msg').text('*');
+            flag = false;
+        }
         if(connectTime == undefined || connectTime == ""){
             $(this).find('.connect_time').siblings('.msg').text('*');
             flag = false;

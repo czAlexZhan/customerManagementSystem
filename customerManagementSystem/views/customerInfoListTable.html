@@ -50,7 +50,7 @@
                     <td><%= data.list[i].ISREPEAT %></td>
                     <td><%= data.list[i].REPEATNAME %></td>
                     <td>
-                        <a href="/viewCustomerInfoAction?id=<%= data.list[i].ID %>"> 查看</a>
+                        <a target="_blank" href="/viewCustomerInfoAction?id=<%= data.list[i].ID %>"> 查看</a>
                         <a href="javascript:void(0);" onclick="deleteCustomerInfo(<%= data.list[i].ID %>)">删除</a>
                     </td>
                 </tr>
