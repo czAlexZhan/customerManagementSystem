@@ -1,7 +1,7 @@
 <% if(data.length > 0){ %>
     <% for(var photo of data){ %>
         <div>
-            <img src="<%= data.PHOTO_PATH %>" title="<%= data.PHOTO_NAME %>">
+            <img src="" title="<%= data.PHOTO_NAME %>">
             <a href="/viewCustomerInfoAction/downloadPhoto?<%= data.PHOTO_ID %>"><%= data.PHOTO_NAME %></a>
         </div>
     <% } %>

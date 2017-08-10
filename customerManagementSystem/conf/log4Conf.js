@@ -1,6 +1,6 @@
 var option = {
     appenders: {
-        cheeseLogs: { type: 'file', filename: './Log/cheese.log' },
+        cheeseLogs: { type: 'file', filename: '../Log/cheese.log' },
         console: { type: 'console' }
     },
     categories: {

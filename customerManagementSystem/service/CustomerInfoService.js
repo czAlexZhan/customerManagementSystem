@@ -46,5 +46,27 @@ module.exports = {
      */
     getPhotosByCustomerId(id,callback){
         customerInfoDao.getPhotosByCustomerId(id,callback);
+    },
+    /*
+        保存聊天记录图片
+     */
+    savaPhotos:function(list){
+        return new Promise((resolve,reject) => {
+           customerInfoDao.savePhotos(list,function(err,results){
+               if(err) reject(err);
+               resolve(results);
+           });
+        });
+    },
+    /**
+     * 更新用户信息
+     */
+    updateCustomerInfo:function(searchMap,userId){
+        return new Promise((resolve,reject) => {
+           customerInfoDao.updateCustomerInfo(searchMap,userId,function(err,results){
+               if(err) reject(err);
+               resolve(results);
+           });
+        });
     }
 };

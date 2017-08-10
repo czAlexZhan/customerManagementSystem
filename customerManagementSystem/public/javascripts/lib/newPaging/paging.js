@@ -51,18 +51,18 @@ var pager = {
 		
 		var str_prv = '', str_next = '', str_goFirst = '', str_goFinal = '';
 		if(hasPrv){
-			str_goFirst = '<a class="goFirst" onclick="pager.search(1);"><img src="/javascripts/lib/newPaging/images/goFirstImg_A.png"/></a>';
+			str_goFirst = '<a class="goFirst" onclick="pager.search(1);"><img src="/javascripts/lib/newPaging/uploadImages/goFirstImg_A.png"/></a>';
 			str_prv = '<a href="javascript:void(0);" onclick="pager.search('+prv+');" title="上页">上页</a>';
 		}else{
-			str_goFirst = '<span class="goFirst"><img src="/javascripts/lib/newPaging/images/goFirstImg_X.png"/></span>';
+			str_goFirst = '<span class="goFirst"><img src="/javascripts/lib/newPaging/uploadImages/goFirstImg_X.png"/></span>';
 			str_prv = '<span class="disabled">上页</span>';
 		}
 		
 		if(hasNext){
-			str_goFinal = '<a class="goFirst" onclick="pager.search('+this.totalPage+');"><img src="/javascripts/lib/newPaging/images/goFinalImg_A.png"/></a>';
+			str_goFinal = '<a class="goFirst" onclick="pager.search('+this.totalPage+');"><img src="/javascripts/lib/newPaging/uploadImages/goFinalImg_A.png"/></a>';
 			str_next = '<a href="javascript:void(0);" onclick="pager.search('+next+');" title="下页">下页</a>';
 		}else{
-			str_goFinal = '<span class="goFirst"><img src="/javascripts/lib/newPaging/images/goFinalImg_X.png"/></span>';
+			str_goFinal = '<span class="goFirst"><img src="/javascripts/lib/newPaging/uploadImages/goFinalImg_X.png"/></span>';
 			str_next = '<span class="disabled">下页</span>';
 		}
 		
@@ -219,18 +219,18 @@ var jBoxPager = {
 		
 		var str_prv = '', str_next = '', str_goFirst = '', str_goFinal = '';
 		if(hasPrv){
-			str_goFirst = '<a class="goFirst" onclick="jBoxPager.search(1);"><img src="/javascripts/lib/newPaging/images/goFirstImg_A.png"/></a>';
+			str_goFirst = '<a class="goFirst" onclick="jBoxPager.search(1);"><img src="/javascripts/lib/newPaging/uploadImages/goFirstImg_A.png"/></a>';
 			str_prv = '<a href="javascript:void(0);" onclick="jBoxPager.search('+prv+');" title="上页">上页</a>';
 		}else{
-			str_goFirst = '<span class="goFirst"><img src="/javascripts/lib/newPaging/images/goFirstImg_X.png"/></span>';
+			str_goFirst = '<span class="goFirst"><img src="/javascripts/lib/newPaging/uploadImages/goFirstImg_X.png"/></span>';
 			str_prv = '<span class="disabled">上页</span>';
 		}
 		
 		if(hasNext){
-			str_goFinal = '<a class="goFirst" onclick="jBoxPager.search('+this.totalPage+');"><img src="/javascripts/lib/newPaging/images/goFinalImg_A.png"/></a>';
+			str_goFinal = '<a class="goFirst" onclick="jBoxPager.search('+this.totalPage+');"><img src="/javascripts/lib/newPaging/uploadImages/goFinalImg_A.png"/></a>';
 			str_next = '<a href="javascript:void(0);" onclick="jBoxPager.search('+next+');" title="下页">下页</a>';
 		}else{
-			str_goFinal = '<span class="goFirst"><img src="/javascripts/lib/newPaging/images/goFinalImg_X.png"/></span>';
+			str_goFinal = '<span class="goFirst"><img src="/javascripts/lib/newPaging/uploadImages/goFinalImg_X.png"/></span>';
 			str_next = '<span class="disabled">下页</span>';
 		}
 		
@@ -351,7 +351,7 @@ function pagingColumnByForegroundNew(divId,showList,pageSize){
 	var pageDiv="";
 	//pagingColumnShowList=showList;
 	pageDiv += "<div id='div_pager'>";
-	pageDiv += " <a class='goFirst' id='pagingColumnFirstPage"+divId+"' title='首页' ><img src='/javascripts/lib/newPaging/images/goFirstImg_A.png'/></a>";
+	pageDiv += " <a class='goFirst' id='pagingColumnFirstPage"+divId+"' title='首页' ><img src='/javascripts/lib/newPaging/uploadImages/goFirstImg_A.png'/></a>";
 	pageDiv += " <a class='' id='pagingColumnUpPage"+divId+"' title='上一页' >上页 </a>";
 	//pageDiv += "<i class='paging_text'>&nbsp;第&nbsp;</i><input type='hidden' id='pagingColumnIndexPage"+divId+"' value='1'/><input type='text' class='paging_input_text' id='pagingColumnCurrentPage"+divId+"' value='1' onkeypress='return noNumbers(event)' />&nbsp;页/共&nbsp;<i class='paging_text' id='pagingColumnTotalPage"+divId+"'></i>页&nbsp;<a class='paging_link page-go' id='pagingColumnSkip"+divId+"' title='GO' >GO</a>";
 	
@@ -360,7 +360,7 @@ function pagingColumnByForegroundNew(divId,showList,pageSize){
 	//pageDiv += "每页<input type='text' id='pagingColunmSelect"+divId+"' style='width:40px;' value='"+pageSize+"' onkeypress='return noNumbers(event)' />条记录&nbsp;|&nbsp;";
 	pageDiv += "<input type='hidden' id='pagingColunmSelect"+divId+"' style='width:40px;' value='"+pageSize+"' />";
 	pageDiv += " <a class='' id='pagingColumnDownPage"+divId+"' title='下一页' >下页</a>";
-	pageDiv += " <a class='goFirst' id='pagingColumnLastPage"+divId+"' title='末页' ><img src='/javascripts/lib/newPaging/images/goFinalImg_A.png'/></a>";
+	pageDiv += " <a class='goFirst' id='pagingColumnLastPage"+divId+"' title='末页' ><img src='/javascripts/lib/newPaging/uploadImages/goFinalImg_A.png'/></a>";
 
 	pageDiv += '<span class="normalsize">共<i class="paging_text" id="pagingColumnTotalPage'+divId+'"></i>页，到第<input type="hidden" id="pagingColumnIndexPage'+divId+'" value="1"/> '+
 				'<input class="btn_go_input" id="pagingColumnCurrentPage'+divId+'" type="text" value="" onkeyup="checkNum(this)" onafterpaste="checkNum(this)"/>'+

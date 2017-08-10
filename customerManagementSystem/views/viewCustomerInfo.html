@@ -91,6 +91,9 @@
             display: inline-block;
             margin: 10px;
         }
+        .msg{
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -102,31 +105,31 @@
                     <input type="hidden" id="id" value="<%= data.ID %>">
                     <tbody>
                     <tr>
-                        <td class="label">用户账号</td>
+                        <td class="label">用户账号<span class="msg">*</span></td>
                         <td><input type="text" class="account" value='<%= data.CUSTOMER_ACCOUNT %>' ></td>
-                        <td class="label">公司名称</td>
+                        <td class="label">公司名称<span class="msg">*</span></td>
                         <td><input type="text" class="target_name" value='<%= data.TARGET_NAME %>' ></td>
                     </tr>
                     <tr>
-                        <td class="label">成交时间</td>
-                        <td><input type="text" class="product_name" value='<%= data.DEAL_TIME %>' onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
-                        <td class="label">联系时间</td>
-                        <td><%= data.CONNECT_TIME %></td>
+                        <td class="label">成交时间<span class="msg">*</span></td>
+                        <td><input type="text" class="deal_time" value='<%= data.DEAL_TIME %>' onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
+                        <td class="label">联系时间<span class="msg">*</span></td>
+                        <td><input type="text" class="connect_time" value='<%= data.CONNECT_TIME %>' onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
                     </tr>
                     <tr>
-                        <td class="label">产品名称</td>
+                        <td class="label">产品名称<span class="msg">*</span></td>
                         <td><input type="text" class="product_name" value='<%= data.PRODUCT_NAME %>' ></td>
-                        <td class="label">产品价格</td>
+                        <td class="label">产品价格<span class="msg">*</span></td>
                         <td><input type="text" class="product_price" value='<%= data.PRODUCT_PRICE %>' ></td>
                     </tr>
                     <tr>
-                        <td class="label">是否成交</td>
+                        <td class="label">是否成交<span class="msg">*</span></td>
                         <td><input type="text" class="isDeal" value='<%= data.ISDEAL %>' ></td>
-                        <td class="label">成交次数</td>
+                        <td class="label">成交次数<span class="msg">*</span></td>
                         <td><input type="text" class="deal_times" value='<%= data.DEAL_TIMES %>' ></td>
                     </tr>
                     <tr>
-                        <td class="label">是否重复</td>
+                        <td class="label">是否重复<span class="msg">*</span></td>
                         <td><input type="text" class="isRepeat" value='<%= data.ISREPEAT %>' ></td>
                         <td class="label">重复名</td>
                         <td><input type="text" class="repeat_name" value='<%= data.REPEAT_NAME %>' ></td>
@@ -138,9 +141,11 @@
                     <tr>
                         <td class="label">聊天记录</td>
                         <td colspan="3" align="left" style="padding-left: 44px;">
-                            <div><a href="javascript:void(0);" onclick="addInput(this)">新增上传</a></div>
+                            <div><a href="javascript:void(0);" onclick="addInput()">新增上传</a></div>
                             <div>
-
+                                <form action="/viewCustomerInfoAction/uploadCustomerInfoAction" method="post" id="form" enctype="multipart/form-data">
+                                    <div><input type="file" accept="image/jpeg,image/jpg,image/png" name="photo"><span><a href="javascript:void(0);" onclick="del(this)">删除</a></span></div>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -153,11 +158,12 @@
 
                 </div>
             </div>
-            <div style="text-align: center;padding-bottom: 10px;"><button id="saveBtn">保存</button></div>
+            <div style="text-align: center;padding-bottom: 10px;"><button onclick="saveCustomerInfo()" id="saveBtn">保存</button></div>
         </div>
     </div>
 </body>
 <script src="javascripts/lib/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="javascripts/lib/jquery.form.js"></script>
 <script src="javascripts/lib/date/wdatePicker.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -179,8 +185,94 @@
             });
         }
     }
-    function addInput(dom){
+    function addInput(){
+        var lenth = $('#form > div').length;
+        if(lenth > 3){
+            alert("一次只上传4个文件");
+            return;
+        }
+        var content = "<div><input type=file accept=image/jpeg,image/jpg,image/png name=photo><span><a href='javascript:void(0);' onclick='del(this)'>删除</a></span></div>";
+        $('#form').append(content);
+    }
+    function del(dom) {
+        $(dom).parent().parent().remove();
+    }
+    function saveCustomerInfo(){
+        var id = $('#id').val();
+        var flag = true;
+        $('.table .msg').text("");
+        var account = $('.account').val();
+        var target_name = $('.target_name').val();
+        var deal_time = $('.deal_time').val();
+        var connect_time = $('.connect_time').val();
+        var product_name = $('.product_name').val();
+        var product_price = $('.product_price').val();
+        var isDeal = $('.isDeal').val();
+        var deal_times = $('.deal_times').val();
+        var store_name = $('.store_name').val();
+        var isRepeat = $('.isRepeat').val();
+        var repeat_name = $('.repeat_name').val();
 
+        if(account == undefined || account == ""){
+            flag = false;
+        }
+        if(target_name == undefined || target_name == ""){
+            flag = false;
+        }
+        if(deal_time == undefined || deal_time == ""){
+            flag = false;
+        }
+        if(connect_time == undefined || connect_time == ""){
+            flag = false;
+        }
+        if(product_name == undefined || product_name == ""){
+            flag = false;
+        }
+        if(product_price == undefined || product_price == ""){
+            flag = false;
+        }
+        if(isDeal == undefined || isDeal == ""){
+            flag = false;
+        }
+        if(deal_times == undefined || deal_times == ""){
+            flag = false;
+        }
+        if(isRepeat == undefined || isRepeat == ""){
+            flag = false;
+        }
+        if(!flag){
+            alert("请先填写必填项");
+        }else{
+            var data = {
+                id:id,
+                account:account,
+                target_name:target_name,
+                deal_time:deal_time,
+                connect_time:connect_time,
+                product_name:product_name,
+                product_price:product_price,
+                isDeal:isDeal,
+                deal_times:deal_times,
+                isRepeat:isRepeat,
+                repeat_name:repeat_name,
+                store_name:store_name
+            };
+            $('#form').ajaxSubmit({
+                data:data,
+                dataType:'json',
+                success:function(data){
+                    if(data.flag){
+                        alert(data.msg);
+                        window.close();
+                    }else{
+                        alert(data.msg);
+                    }
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        }
     }
 </script>
 </html>

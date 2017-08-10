@@ -188,5 +188,79 @@ module.exports = {
                 });
             }
         });
+    },
+    savePhotos:function(list,callback){
+        global.sqlPool.getConnection(function(err,connection){
+            if(err){
+                callback(err);
+            }else if(connection && 'query' in connection){
+                var sql = "insert into sys_photo(rela_customer_id,type,photo_name,photo_path,create_user_id,create_time,status) values ?";
+                if(list != undefined && list.length>0){
+                    connection.query(sql,[list],function(err,results){
+                        if(err){
+                            callback(err);
+                        }else{
+                            callback(null,results);
+                        }
+                        connection.release();
+                    });
+                }
+            }
+        });
+    },
+    updateCustomerInfo:function(searchMap,userId,callback){
+        global.sqlPool.getConnection(function(err,connection){
+            if(err){
+                callback(err);
+            }else if(connection && 'query' in connection){
+               var sql = "update sys_customerinfo set ";
+               var valueSql = "";
+                if(searchMap != null && searchMap.size>0){
+                    if(searchMap.get('customer_account') != null && searchMap.get('customer_account') != ""){
+                        valueSql += ",customer_account='"+searchMap.get('customer_account')+"'";
+                    }
+                    if(searchMap.get('target_name') != null && searchMap.get('target_name') != ""){
+                        valueSql += ",target_name='"+searchMap.get('target_name')+"'";
+                    }
+                    if(searchMap.get('deal_time') != null && searchMap.get('deal_time') != ""){
+                        valueSql += ",deal_time='"+searchMap.get('deal_time')+"'";
+                    }
+                    if(searchMap.get('connect_time') != null && searchMap.get('connect_time') != ""){
+                        valueSql += ",connect_time='"+searchMap.get('connect_time')+"'";
+                    }
+                    if(searchMap.get('product_name') != null && searchMap.get('product_name') != ""){
+                        valueSql += ",product_name='"+searchMap.get('product_name')+"'";
+                    }
+                    if(searchMap.get('product_price') != null && searchMap.get('product_price') != ""){
+                        valueSql += ",product_price='"+searchMap.get('product_price')+"'";
+                    }
+                    if(searchMap.get('isDeal') != null && searchMap.get('isDeal')==""){
+                        valueSql += ",isDeal='"+searchMap.get('isDeal')+"'";
+                    }
+                    if(searchMap.get('deal_times') != null && searchMap.get('deal_times')==""){
+                        valueSql += ",deal_times="+searchMap.get('deal_times');
+                    }
+                    if(searchMap.get('isRepeat') != null && searchMap.get('isRepeat')==""){
+                        valueSql += ",isRepeat='"+searchMap.get('isRepeat')+"'";
+                    }
+                    if(searchMap.get('repeat_name') != null && searchMap.get('repeat_name')==""){
+                        valueSql += ",repeat_name='"+searchMap.get('repeat_name')+"'";
+                    }
+                    if(searchMap.get('store_name') != null && searchMap.get('store_name')==""){
+                        valueSql += ",store_name='"+searchMap.get('store_name')+"'";
+                    }
+                    sql = sql + valueSql.slice(1);
+                    connection.query(sql,function(err,results){
+                        if(err){
+                            callback(err);
+                        }else{
+                            callback(null,results);
+                        }
+                        connection.release();
+                    });
+                }
+            }
+        });
     }
+
 };

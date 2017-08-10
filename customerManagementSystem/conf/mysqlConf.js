@@ -5,7 +5,7 @@ module.exports = {
             user: 'root',
             password: '123456',
             port: '3306',
-            database:'customermanagement',
+            database:'customermanegement',
             charset:'UTF8_GENERAL_CI'
 		}
 };
