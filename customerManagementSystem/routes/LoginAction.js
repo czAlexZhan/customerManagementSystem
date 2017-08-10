@@ -74,7 +74,7 @@ router.post('/register',function (req, res) {
                     res.send(200,{flag:true,msg:"注册成功"});
 
                     // res.redirect('/login');
-                    res.send(200,{msg:"注册成功"});
+                    // res.send(200,{msg:"注册成功"});
 
                 }
             }

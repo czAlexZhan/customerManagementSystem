@@ -107,7 +107,7 @@
                     <tr>
                         <td class="label">用户账号<span class="msg">*</span></td>
                         <td><input type="text" class="account" value='<%= data.CUSTOMER_ACCOUNT %>' ></td>
-                        <td class="label">公司名称<span class="msg">*</span></td>
+                        <td class="label">公司名称</td>
                         <td><input type="text" class="target_name" value='<%= data.TARGET_NAME %>' ></td>
                     </tr>
                     <tr>
@@ -216,9 +216,9 @@
         if(account == undefined || account == ""){
             flag = false;
         }
-        if(target_name == undefined || target_name == ""){
-            flag = false;
-        }
+//        if(target_name == undefined || target_name == ""){
+//            flag = false;
+//        }
         if(deal_time == undefined || deal_time == ""){
             flag = false;
         }

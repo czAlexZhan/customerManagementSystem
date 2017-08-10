@@ -1,8 +1,8 @@
+const express = require('express');
+const router = express.Router();
 /**
  * Created by 詹 on 2017/8/9.
  */
-const express = require('express');
-const router = express.Router();
 const customerInfoService = require('../service/CustomerInfoService');
 const logger = require('../service/LogService').logger('viewCustomerInfoAction');
 const formidable = require('formidable');
@@ -75,38 +75,41 @@ router.post('/uploadCustomerInfoAction',function (req, res) {
             searchMap.set("isRepeat",isRepeat);
             searchMap.set("repeat_name",repeat_name);
             searchMap.set("store_name",store_name);
-            customerInfoService.updateCustomerInfo(searchMap,userId).then(function (results) {
-                let insertNum = 0;
-               if(results.affectedRows > 0){
-                   let filesArr = new Array();
-                   for(let file of allfiles){
-                       let type = file[1].name.split('.');
-                       let date = new Date();
-                       let year = date.getFullYear();
-                       let month = date.getMonth()+1;
-                       let day = date.getDate();
-                       let uuid = uuidV1();
-                       let path = "/"+year+"-"+month+"-"+day+"-"+uuid+"."+String(type[type.length-1]);
-                       let savePath = "/uploadImages"+path;
-                       fs.renameSync(file[1].path,form.uploadDir+path);
-                       let photoName = "与"+customer_account+"的聊天截图";
-                       filesArr.push(new Array(id,'Certificate',photoName,savePath,userId,'now()','A'));
-                   }
-                  customerInfoService.savaPhotos(filesArr).then(function(results){
-                     if(results.affectedRows > 0){
-                        res.send(200,{flag:true,msg:"保存成功"});
-                     }else{
-                         res.send(200,{flag:false,msg:"保存图片失败"});
-                     }
-                  }).catch(function(err){
-                      logger.error("进入编辑用户信息 保存用户图片出错"+err);
-                  });
-               } else{
-                   res.send(200,{flag:false,msg:"保存失败"});
-               }
-            }).catch(function (err) {
-                logger.error("进入编辑用户信息 保存用户信息出错"+err);
-            });
+            if(id > 0){
+                customerInfoService.updateCustomerInfo(searchMap,userId).then(function (results) {
+                    let insertNum = 0;
+                    if(results.affectedRows > 0){
+                        let filesArr = new Array();
+                        for(let file of allfiles){
+                            let type = file[1].name.split('.');
+                            let date = new Date();
+                            let year = date.getFullYear();
+                            let month = date.getMonth()+1;
+                            let day = date.getDate();
+                            let uuid = uuidV1();
+                            let path = "/"+year+"-"+month+"-"+day+"-"+uuid+"."+String(type[type.length-1]);
+                            let savePath = "/uploadImages"+path;
+                            fs.renameSync(file[1].path,form.uploadDir+path);
+                            filesArr.push(new Array(id,'Certificate',path,savePath,userId,'A'));
+                        }
+                        customerInfoService.savaPhotos(filesArr).then(function(results){
+                            if(results.affectedRows > 0){
+                                res.send(200,{flag:true,msg:"保存成功"});
+                            }else{
+                                res.send(200,{flag:false,msg:"保存图片失败"});
+                            }
+                        }).catch(function(err){
+                            logger.error("进入编辑用户信息 保存用户图片出错"+err);
+                        });
+                    } else{
+                        res.send(200,{flag:false,msg:"保存失败"});
+                    }
+                }).catch(function (err) {
+                    logger.error("进入编辑用户信息 保存用户信息出错"+err);
+                });
+            }else{
+                res.send(200,{flag:false,msg:"保存失败"});
+            }
 
         }
     });

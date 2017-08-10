@@ -9,12 +9,12 @@ var $record_table = $('#record_table');
 $('#changeBg button').on('click',function () {
    var index = Number($('.body_bg').attr('data-index'));
    if(index == 5){
-       var url = "url('../../uploadImages/bg_1.jpg')";
+       var url = "url('../../images/bg_1.jpg')";
        $('.body_bg').css({'background':url,'background-size':'cover'});
        $('.body_bg').attr('data-index','1');
    }else{
        index++;
-       var url = "url('../../uploadImages/bg_"+index+".jpg')";
+       var url = "url('../../images/bg_"+index+".jpg')";
        $('.body_bg').css({'background':url,'background-size':'cover'});
        $('.body_bg').attr('data-index',index);
    }
@@ -84,10 +84,10 @@ function saveInfo() {
             $(this).find('.account').siblings('.msg').text('*');
             flag = false;
         }
-        if(targetName == undefined || targetName == ""){
-            $(this).find('.target_name').siblings('.msg').text('*');
-            flag = false;
-        }
+        // if(targetName == undefined || targetName == ""){
+        //     $(this).find('.target_name').siblings('.msg').text('*');
+        //     flag = false;
+        // }
         if(dealTime == undefined || dealTime == ""){
             $(this).find('.deal_time').siblings('.msg').text('*');
             flag = false;
