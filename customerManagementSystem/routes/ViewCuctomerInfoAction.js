@@ -12,15 +12,19 @@ var path = require('path');
 
 router.get('/',function(req,res){
     logger.info("进入查看编辑用户 viewCustomerInfoAction");
-    let id = req.query.id;
-    customerInfoService.getCustomerInfoById(id,function (err, results) {
-       if(err){
-           logger.error("查询数据库error"+err);
-       } else if(results.length > 0){
-           logger.info("结束查看编辑用户 viewCustomerInfoAction");
-           res.render('viewCustomerInfo',{data:results[0]});
-       }
-    });
+    if(!req.session.sys_user_id){
+        res.redirect('/login');
+    }else{
+        let id = req.query.id;
+        customerInfoService.getCustomerInfoById(id,function (err, results) {
+            if(err){
+                logger.error("查询数据库error"+err);
+            } else if(results.length > 0){
+                logger.info("结束查看编辑用户 viewCustomerInfoAction");
+                res.render('viewCustomerInfo',{data:results[0]});
+            }
+        });
+    }
 });
 router.post('/getPhotosAction',function(req,res){
     logger.info("进入获取记录图片 /viewCustomerInfoAction/getPhotosAction");
@@ -43,7 +47,9 @@ router.post('/uploadCustomerInfoAction',function (req, res) {
     form.keepExtensions = true;
     form.maxFieldsSize = 10 * 1024 * 1024;
     form.on('file',function(filed,file){
-        allfiles.push([filed,file]);
+        if(file.size>0){
+            allfiles.push([filed,file]);
+        }
     });
     form.parse(req,(err,fields) => {
         if(err){
@@ -89,18 +95,23 @@ router.post('/uploadCustomerInfoAction',function (req, res) {
                             let uuid = uuidV1();
                             let path = "/"+year+"-"+month+"-"+day+"-"+uuid+"."+String(type[type.length-1]);
                             let savePath = "/uploadImages"+path;
+                            let pathName = "chatting_record";
                             fs.renameSync(file[1].path,form.uploadDir+path);
-                            filesArr.push(new Array(id,'Certificate',path,savePath,userId,'A'));
+                            filesArr.push(new Array(id,'Certificate',pathName,savePath,userId,'A'));
                         }
-                        customerInfoService.savaPhotos(filesArr).then(function(results){
-                            if(results.affectedRows > 0){
-                                res.send(200,{flag:true,msg:"保存成功"});
-                            }else{
-                                res.send(200,{flag:false,msg:"保存图片失败"});
-                            }
-                        }).catch(function(err){
-                            logger.error("进入编辑用户信息 保存用户图片出错"+err);
-                        });
+                        if(allfiles.length > 0){
+                            customerInfoService.savaPhotos(filesArr).then(function(results){
+                                if(results.affectedRows > 0){
+                                    res.send(200,{flag:true,msg:"保存成功"});
+                                }else{
+                                    res.send(200,{flag:false,msg:"保存图片失败"});
+                                }
+                            }).catch(function(err){
+                                logger.error("进入编辑用户信息 保存用户图片出错"+err);
+                            });
+                        }else {
+                            res.send(200, {flag: true, msg: "保存成功"});
+                        }
                     } else{
                         res.send(200,{flag:false,msg:"保存失败"});
                     }
@@ -113,6 +124,14 @@ router.post('/uploadCustomerInfoAction',function (req, res) {
 
         }
     });
-
+});
+router.get('/downloadPhoto',function(req,res){
+    var path = req.query.path;
+    var realPath = "../uploadFile"+path;
+    if(path != ""){
+        res.download(realPath);
+    }else{
+        res.send("错误的请求");
+    }
 });
 module.exports = router;

@@ -1,10 +1,10 @@
 <% if(data.length > 0){ %>
     <% for(var photo of data){ %>
         <div>
-            <img src="" title="<%= data.PHOTO_NAME %>">
-            <a href="/viewCustomerInfoAction/downloadPhoto?<%= data.PHOTO_ID %>"><%= data.PHOTO_NAME %></a>
+            <a target="_blank" href="<%= photo.PHOTO_PATH %>"><img src="<%= photo.PHOTO_PATH %>" title="<%= photo.PHOTO_NAME %>"></a>
+            <a href="/viewCustomerInfoAction/downloadPhoto?path=<%= photo.PHOTO_PATH %>"><%= photo.PHOTO_NAME %></a>
         </div>
     <% } %>
 <% }else{ %>
-    <div style="text-align: center;">暂无图片</div>
+    <div style="padding-left: 22px;">暂无图片</div>
 <% } %>

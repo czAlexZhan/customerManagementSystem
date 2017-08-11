@@ -96,14 +96,14 @@ function saveInfo() {
             $(this).find('.connect_time').siblings('.msg').text('*');
             flag = false;
         }
-        if(productName == undefined || productName == ""){
-            $(this).find('.connect_time').siblings('.msg').text('*');
-            flag = false;
-        }
-        if(productPrice == undefined || productPrice == ""){
-            $(this).find('.product_price').siblings('.msg').text('*');
-            flag = false;
-        }
+        // if(productName == undefined || productName == ""){
+        //     $(this).find('.product_name').siblings('.msg').text('*');
+        //     flag = false;
+        // }
+        // if(productPrice == undefined || productPrice == ""){
+        //     $(this).find('.product_price').siblings('.msg').text('*');
+        //     flag = false;
+        // }
         if(isDeal == undefined || isDeal == ""){
             $(this).find('.isDeal').siblings('.msg').text('*');
             flag = false;
@@ -150,8 +150,12 @@ function findCustomerInfo(){
     var target_name = $('#target_name').val();
     var product_name = $('#product_name').val();
     var isDeal = $('#isDeal:checked').val();
+    var notDeal = $('#notDeal:checked').val();
     if(isDeal == undefined){
         isDeal = "0";
+    }
+    if(notDeal == undefined){
+        notDeal = "0";
     }
     var connectTimeStart = $('#connectTimeStart').val();
     var connectTimeEnd = $('#connectTimeEnd').val();
@@ -169,6 +173,7 @@ function findCustomerInfo(){
         target_name:target_name,
         product_name:product_name,
         isDeal:isDeal,
+        notDeal:notDeal,
         connectTimeStart:connectTimeStart,
         connectTimeEnd:connectTimeEnd,
         dealTimeStart:dealTimeStart,

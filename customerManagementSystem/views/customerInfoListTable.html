@@ -6,13 +6,21 @@
         background-color: #fff;
     }
     .table-bordered .headTr{
-        background:#eff5fd;
+        background: #07489c;
+        color: white;
     }
     .table-bordered tr th,.table-bordered tr td{
         border: 1px solid #e0e0e0;
         padding: 8px;
         line-height: 1.42857143;
         vertical-align: middle;
+    }
+    .table-bordered tbody tr:nth-child(odd){
+        background: #d2ddec;
+    }
+    .table-bordered tbody tr:hover{
+        background: #ffbe5f;
+        cursor: pointer;
     }
 </style>
 <input type="hidden" id="totalPage" value='<%= data.countPage %>'>

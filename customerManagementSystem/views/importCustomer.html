@@ -58,7 +58,7 @@
                 <form id="importForm" action="/importCustomerInfoAction/importAction" method="post" enctype="multipart/form-data">
                     <label for="file">请选择要导入的excel文件：</label>
                     <input id="file" name="file" type="file">
-                    <input type="button" id="import" value="导入">
+                    <input type="button" id="import" value="导入" onclick="checkInvoInfoExcel()">
                 </form>
                 <div class="msg">
 

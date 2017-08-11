@@ -41,6 +41,7 @@ router.post('/findCustomerInfoAction',function (req, res) {
     let target_name = req.body.target_name;
     let product_name = req.body.product_name;
     let isDeal = req.body.isDeal;
+    let notDeal = req.body.notDeal;
     let connectTimeStart = req.body.connectTimeStart;
     let connectTimeEnd = req.body.connectTimeEnd;
     let dealTimeStart = req.body.dealTimeStart;
@@ -53,6 +54,7 @@ router.post('/findCustomerInfoAction',function (req, res) {
     searchMap.set('target_name',target_name);
     searchMap.set('product_name',product_name);
     searchMap.set('isDeal',isDeal);
+    searchMap.set('notDeal',notDeal);
     searchMap.set('connectTimeStart',connectTimeStart);
     searchMap.set('connectTimeEnd',connectTimeEnd);
     searchMap.set('dealTimeStart',dealTimeStart);

@@ -15,12 +15,13 @@ module.exports = {
             var rdata = excelObj[i];
             var arr = new Array(); //临时存一行用户记录
             for(let j=0;j<rdata.length;j++){ //遍历单元格
-                arr.push(rdata[j]);
+                arr.push(rdata[j]==null?"":rdata[j]);
             }
             customerInfoList.push(arr);
             rowNum++;
         }
         console.log("共有"+rowNum+"条数据/n");
+        return customerInfoList;
     },
     checkCustomerInfoExcelData:function (excel) {
         var resultsMap = {};

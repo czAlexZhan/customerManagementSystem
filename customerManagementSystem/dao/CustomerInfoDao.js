@@ -1,7 +1,4 @@
 module.exports = {
-    /**
-     * 插入记录
-      */
     insertCustomerInfo:function (list, callback) {
         global.sqlPool.getConnection(function(err,connection){
             if(err){
@@ -50,6 +47,9 @@ module.exports = {
                     }
                     if(searchMap.get('isDeal') != null && searchMap.get('isDeal')=="1"){
                         whereSql += " and isdeal='是'";
+                    }
+                    if(searchMap.get('notDeal') != null && searchMap.get('notDeal')=="1"){
+                        whereSql += " and isdeal='否'";
                     }
                     if(searchMap.get('connectTimeStart') != null && searchMap.get('connectTimeStart') != ""){
                         whereSql += " and date_format(connect_time,'%Y-%m-%d %H:%i:%s') >= '"+searchMap.get('connectTimeStart')+"'";
@@ -263,5 +263,4 @@ module.exports = {
             }
         });
     }
-
 };
